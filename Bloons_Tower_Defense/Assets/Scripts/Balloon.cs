@@ -4,49 +4,64 @@ using UnityEngine;
 
 public class Balloon : MonoBehaviour
 {
-    public int movePointNumber = 14;
-    public int CurrentmovePoint = 0;
-    Transform[] movePoint;
+    public int movePointNumber = 13;
+    int CurrentmovePoint = 0;
+    public Transform[] movePoint;
+    public int balloonHP = 1;
 
-    public float balloonSpeed = 1.0f;
+    public float balloonSpeed = 10.0f;
 
 
     void Start()
     {
-        
-    }
-
-    void BalloonStart()
-    {
-        movePoint = new Transform[movePointNumber];
-        transform.position = movePoint[0].position;
-
-    }
-
-    void BalloonMove()
-    {
-        if (Vector2.Distance(transform.position, movePoint[CurrentmovePoint + 1].position) < 0.01f)
-        {
-            CurrentmovePoint++;
-            transform.position = movePoint[CurrentmovePoint].position;
-            
-            BalloonEnd();
-        }
-        else
-        {
-            ////////////////////여기부터
-            transform.Translate(0.0f, 0.0f, 0.0f);
-        }
-
-    }
-
-    void BalloonEnd()
-    {
-
+        BalloonStart();
     }
 
     void Update()
     {
-        
+        BalloonMove();
     }
+
+
+    void BalloonStart()
+    {
+        transform.position = movePoint[0].position;
+    }
+
+    void BalloonMove()
+    {
+        Vector2 nextPos = movePoint[CurrentmovePoint + 1].position;
+
+        if (Mathf.Abs(transform.position.x - nextPos.x) > Mathf.Abs(transform.position.y - nextPos.y))
+        {
+            if (nextPos.x > transform.position.x)
+                transform.Translate(0.1f * balloonSpeed * Time.deltaTime, 0.0f, 0.0f);
+            else
+                transform.Translate(-0.1f * balloonSpeed * Time.deltaTime, 0.0f, 0.0f);
+        }
+        else
+        {
+            if (nextPos.y > transform.position.y)
+                transform.Translate(0.0f, 0.1f * balloonSpeed * Time.deltaTime, 0.0f);
+            else
+                transform.Translate(0.0f, -0.1f * balloonSpeed * Time.deltaTime, 0.0f);
+        }
+
+        if (Vector2.Distance(transform.position, nextPos) < 0.1f)
+        {
+            CurrentmovePoint++;
+            transform.position = movePoint[CurrentmovePoint].position;
+
+            BalloonEnd();
+        }
+    }
+
+    void BalloonEnd()
+    {
+        if (movePointNumber - 1 == CurrentmovePoint)
+        {
+            Object.Destroy(gameObject);
+        }
+    }
+
 }
