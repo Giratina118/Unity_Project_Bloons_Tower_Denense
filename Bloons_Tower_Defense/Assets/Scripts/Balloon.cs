@@ -8,8 +8,8 @@ public class Balloon : MonoBehaviour
     int CurrentmovePoint = 0;
     public Transform[] movePoint;
     public int balloonHP = 1;
-
     public float balloonSpeed = 10.0f;
+
 
 
     void Start()
@@ -63,5 +63,7 @@ public class Balloon : MonoBehaviour
             Object.Destroy(gameObject);
         }
     }
+
+
 
 }
