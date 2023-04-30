@@ -28,13 +28,10 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         image.color = new Color(1f, 1f, 1f, 1f);
-        //DragingIcon.sprite = GetComponent<Image>().sprite;
         DragingIcon.gameObject.SetActive(false);
-
 
         Tower2 towclone = GameObject.Instantiate(m_CloneTower);
         towclone.SetSprite( GetComponent<Image>().sprite );
-
 
         Vector3 mousepos = Input.mousePosition;
         Vector3 wpos = Camera.main.ScreenToWorldPoint(mousepos);

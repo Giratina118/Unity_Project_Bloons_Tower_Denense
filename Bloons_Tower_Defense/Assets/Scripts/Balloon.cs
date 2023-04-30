@@ -64,6 +64,16 @@ public class Balloon : MonoBehaviour
         }
     }
 
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Attack")
+        {
+            balloonHP = -attDmg;
+            if (balloonHP <= 0)
+            {
+                Object.Destroy(other.gameObject);
+            }
+        }
+    }
 
 }

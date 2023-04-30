@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class Tower2 : MonoBehaviour
 {
-
     protected SpriteRenderer m_LinkRender = null;
     public float attackRange = 2.0f;
+    public int attDmg = 1;
+    public int attDelay = 1000;
 
     public GameObject copyObj;
     GameObject cloneObj;
     Vector3 attPos;
 
-    CapsuleCollider2D capsuleCollider;
+    CircleCollider2D circleCollider;
+    public GameObject targetBallon;
 
 
     public void SetSprite( Sprite p_img )
@@ -27,22 +30,24 @@ public class Tower2 : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "balloon")
+        Debug.Log("¡¢√À");
+        if (other.tag == "Balloon")
         {
+            targetBallon = other.gameObject;
             cloneObj = GameObject.Instantiate(copyObj);
             cloneObj.transform.position = attPos;
             cloneObj.SetActive(true);
+            Thread.Sleep(attDelay);
         }
-
-
     }
 
 
     void Start()
     {
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
+        circleCollider.radius = attackRange;
     }
 
     void Update()

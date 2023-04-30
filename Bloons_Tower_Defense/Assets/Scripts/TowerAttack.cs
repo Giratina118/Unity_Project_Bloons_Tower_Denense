@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class TowerAttack : MonoBehaviour
 {
-    public int attDmg = 1;
+    
     public float attSpeed = 2.0f;
-    public GameObject targetBalloon;
+    GameObject targetBalloon;
 
     public Balloon balloon;
-
+    public Tower2 tower;
 
     void Start()
     {
         balloon.GetComponent<Balloon>();
+        tower.GetComponent<Collider2D>();
     }
 
     void Update()
     {
-        Vector3 targetDir = (targetBalloon.transform.position - this.transform.position).normalized;
+        Vector3 targetDir = (tower.targetBallon.transform.position - this.transform.position).normalized;
 
         transform.Translate(targetDir.x * attSpeed * Time.deltaTime, targetDir.y * attSpeed * Time.deltaTime, 0.0f);
 
@@ -26,14 +27,11 @@ public class TowerAttack : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Object.Destroy(gameObject);
-        balloon.balloonHP = -attDmg;
-        if (balloon.balloonHP <= 0)
+        if (other.tag == "Balloon")
         {
-            Object.Destroy(other.gameObject);
+            Object.Destroy(gameObject);
+            
         }
-
-
     }
     
 }

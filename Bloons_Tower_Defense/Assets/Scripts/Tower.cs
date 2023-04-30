@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class Tower : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    Image image;
     public float attackRange = 2.0f;
 
     public GameObject copyObj;
@@ -20,7 +19,6 @@ public class Tower : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragH
 
     void Start()
     {
-        image = GetComponent<Image>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
     }
 
