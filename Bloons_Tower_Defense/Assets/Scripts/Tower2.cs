@@ -8,15 +8,14 @@ public class Tower2 : MonoBehaviour
     protected SpriteRenderer m_LinkRender = null;
     public float attackRange = 2.0f;
     public int attDmg = 1;
-    public int attDelay = 1000;
+    public float attDelay = 2.0f;
 
     public GameObject copyObj;
-    GameObject cloneObj;
-    Vector3 attPos;
 
-    CircleCollider2D circleCollider;
+    public CreatBalloon creatBalloon;
     public GameObject targetBallon;
 
+    float attackTimer = 0.0f;
 
     public void SetSprite( Sprite p_img )
     {
@@ -27,31 +26,51 @@ public class Tower2 : MonoBehaviour
     private void Awake()
     {
         m_LinkRender = GetComponent<SpriteRenderer>();
-        
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void SelectTarget()
     {
-        Debug.Log("¡¢√À");
-        if (other.tag == "Balloon")
+        Debug.Log($"{creatBalloon.balloonsList.Count}");
+
+        float targetLength = attackRange;
+        for (int i = 0; i < creatBalloon.balloonsList.Count; i++)
         {
-            targetBallon = other.gameObject;
-            cloneObj = GameObject.Instantiate(copyObj);
-            cloneObj.transform.position = attPos;
-            cloneObj.SetActive(true);
-            Thread.Sleep(attDelay);
+            float distance = Vector3.Distance(creatBalloon.balloonsList[i].transform.position, transform.position);
+
+            if (distance <= attackRange)
+            {
+                targetLength = distance;
+                targetBallon = creatBalloon.balloonsList[i].gameObject;
+                AttCreate();
+                attackTimer = 0.0f;
+                break;
+            }
+
         }
     }
 
 
+    void AttCreate()
+    {
+        GameObject cloneObj = GameObject.Instantiate(copyObj);
+        cloneObj.SetActive(true);
+        cloneObj.transform.position = this.transform.position;
+        cloneObj.GetComponent<TowerAttack>().TargetSet(targetBallon);
+        cloneObj.GetComponent<TowerAttack>().SetDamage(attDmg);
+    }
+
+
+
     void Start()
     {
-        circleCollider = GetComponent<CircleCollider2D>();
-        circleCollider.radius = attackRange;
+        attackTimer = attDelay;
     }
 
     void Update()
     {
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= attDelay)
+            SelectTarget();
         
     }
 

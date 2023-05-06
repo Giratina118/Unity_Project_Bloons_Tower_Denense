@@ -20,9 +20,9 @@ public class Canvas2TileGird : MonoBehaviour
         Gizmos.color = Color.red;
         Vector3 temppos = Wpos;
 
-
-        temppos.x = Mathf.Round(temppos.x);
-        temppos.y = Mathf.Round(temppos.y);
+        
+        temppos.x = Mathf.Floor(temppos.x) + 0.5f;
+        temppos.y = Mathf.Floor(temppos.y) + 0.5f;
         temppos.z = 0;
         
         Gizmos.DrawWireCube(temppos, Vector3.one * 0.3f);
@@ -36,9 +36,6 @@ public class Canvas2TileGird : MonoBehaviour
         Vector3 wpos = SceneCamera.ScreenToWorldPoint(mousepos);
 
         Wpos = wpos;
-
-        
-
 
     }
 }

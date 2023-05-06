@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -9,6 +10,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     Image image;
     public Tower2 m_CloneTower = null;
     public Image DragingIcon = null;
+    bool[,] setTower = null;
 
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -30,14 +32,17 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         image.color = new Color(1f, 1f, 1f, 1f);
         DragingIcon.gameObject.SetActive(false);
 
+
+
+
         Tower2 towclone = GameObject.Instantiate(m_CloneTower);
-        towclone.SetSprite( GetComponent<Image>().sprite );
+        towclone.SetSprite(GetComponent<Image>().sprite);
 
         Vector3 mousepos = Input.mousePosition;
         Vector3 wpos = Camera.main.ScreenToWorldPoint(mousepos);
 
-        wpos.x = Mathf.Round(wpos.x);
-        wpos.y = Mathf.Round(wpos.y);
+        wpos.x = Mathf.Floor(wpos.x) + 0.5f;
+        wpos.y = Mathf.Floor(wpos.y) + 0.5f;
         wpos.z = -0.1f;
         towclone.transform.position = wpos;
 
@@ -47,10 +52,12 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     void Start()
     {
         image = GetComponent<Image>();
+        setTower = GetComponent<SetTowerBool>().isAble;
     }
 
     void Update()
     {
-        
+
     }
+
 }

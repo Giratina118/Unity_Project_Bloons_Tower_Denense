@@ -285,10 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24cd20280ff9f34fbbcc83cc050b433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attDmg: 1
   attSpeed: 10
-  balloon: {fileID: 875615660}
-  tower: {fileID: 510585422}
 --- !u!212 &64461281
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -823,6 +820,7 @@ GameObject:
   - component: {fileID: 473287120}
   - component: {fileID: 473287122}
   - component: {fileID: 473287121}
+  - component: {fileID: 473287123}
   m_Layer: 5
   m_Name: bombTower
   m_TagString: Untagged
@@ -888,6 +886,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473287119}
   m_CullTransparentMesh: 1
+--- !u!114 &473287123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473287119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bac0ef3b9283784f857506d2d97bddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CloneTower: {fileID: 510585422}
+  DragingIcon: {fileID: 2101673982}
 --- !u!1 &510585419
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +984,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &510585422
 MonoBehaviour:
@@ -987,9 +999,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attDelay: 1000
+  attDmg: 1
+  attDelay: 0.5
   copyObj: {fileID: 64461279}
-  targetBallon: {fileID: 0}
+  creatBalloon: {fileID: 997811105}
+  targetBallon: {fileID: 997811104}
 --- !u!58 &510585423
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1052,6 +1066,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneCamera: {fileID: 1994546265}
   Wpos: {x: 0, y: 0, z: 0}
+--- !u!1 &669393475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 669393477}
+  - component: {fileID: 669393476}
+  m_Layer: 0
+  m_Name: TowerSettingBool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &669393476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669393475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092d51bcdf05554449a77af6ecb9f175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &669393477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669393475}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.340002, y: 0.22465214, z: 0.054405067}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &875615658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,8 +1172,9 @@ MonoBehaviour:
   - {fileID: 200217468}
   - {fileID: 176287908}
   - {fileID: 2105604934}
-  balloonHP: 1
+  balloonHP: 2
   balloonSpeed: 20
+  CreatBalloon: {fileID: 997811105}
 --- !u!212 &875615661
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1251,6 +1310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   copyObj: {fileID: 875615658}
+  balloonsList: []
 --- !u!1001 &1066473648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1404,54 +1464,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CloneTower: {fileID: 510585422}
   DragingIcon: {fileID: 2101673982}
---- !u!1 &1286652432
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1286652434}
-  - component: {fileID: 1286652433}
-  m_Layer: 0
-  m_Name: attRangeCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!58 &1286652433
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286652432}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
---- !u!4 &1286652434
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286652432}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1433887, y: -0.38562065, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1750095857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3713,6 +3725,7 @@ GameObject:
   - component: {fileID: 1929347368}
   - component: {fileID: 1929347370}
   - component: {fileID: 1929347369}
+  - component: {fileID: 1929347371}
   m_Layer: 5
   m_Name: ninjaMonkey
   m_TagString: Untagged
@@ -3778,6 +3791,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929347367}
   m_CullTransparentMesh: 1
+--- !u!114 &1929347371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929347367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bac0ef3b9283784f857506d2d97bddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CloneTower: {fileID: 510585422}
+  DragingIcon: {fileID: 2101673982}
 --- !u!1001 &1941933885
 PrefabInstance:
   m_ObjectHideFlags: 0

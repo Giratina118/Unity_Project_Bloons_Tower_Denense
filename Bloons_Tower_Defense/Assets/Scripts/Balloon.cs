@@ -10,6 +10,7 @@ public class Balloon : MonoBehaviour
     public int balloonHP = 1;
     public float balloonSpeed = 10.0f;
 
+    public CreatBalloon CreatBalloon;
 
 
     void Start()
@@ -20,6 +21,7 @@ public class Balloon : MonoBehaviour
     void Update()
     {
         BalloonMove();
+        
     }
 
 
@@ -30,6 +32,8 @@ public class Balloon : MonoBehaviour
 
     void BalloonMove()
     {
+        BalloonEnd();
+
         Vector2 nextPos = movePoint[CurrentmovePoint + 1].position;
 
         if (Mathf.Abs(transform.position.x - nextPos.x) > Mathf.Abs(transform.position.y - nextPos.y))
@@ -58,21 +62,9 @@ public class Balloon : MonoBehaviour
 
     void BalloonEnd()
     {
-        if (movePointNumber - 1 == CurrentmovePoint)
+        if (movePointNumber - 1 == CurrentmovePoint || balloonHP <= 0)
         {
-            Object.Destroy(gameObject);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Attack")
-        {
-            balloonHP = -attDmg;
-            if (balloonHP <= 0)
-            {
-                Object.Destroy(other.gameObject);
-            }
+            CreatBalloon.DestroyBalloons(this);
         }
     }
 
