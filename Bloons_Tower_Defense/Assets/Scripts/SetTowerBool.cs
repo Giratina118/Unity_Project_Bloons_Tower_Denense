@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class SetTowerBool : MonoBehaviour
 {
-    public bool[ , ] isAble;
+    public bool[,] isAble;
+    int x, y;
 
 
-    public void setMap1Bool(int x, int y)
+    public bool ISAbleMap1Bool(Vector2 p_wpos)
     {
-        isAble[x, y] = false;
+
+        x = (int)Mathf.Floor(p_wpos.x) + 8;
+        y = 4 - (int)Mathf.Floor(p_wpos.y);
+        if (y < 0 || y > 9 || x < 0 || x > 13)
+            return false;
+        else
+            return isAble[y, x];
+    }
+    public void setMap1Bool()
+    {
+        isAble[y, x] = false;
     }
 
     public void setMap1Start()
@@ -43,12 +54,13 @@ public class SetTowerBool : MonoBehaviour
 
         isAble[1, 8] = isAble[2, 8] = isAble[2, 10] = isAble[2, 11] = isAble[3, 10] 
             = isAble[4, 10] = isAble[6, 2] = isAble[7, 2] = isAble[8, 7] = isAble[8, 8] = false;
+        
     }
 
     void Start()
     {
         setMap1Start();
-
+        //GetComponent<DragIcon>().setField();
     }
 
 
