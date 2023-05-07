@@ -8,7 +8,7 @@ public class TowerAttack : MonoBehaviour
 
     private GameObject target;
     private Balloon balloon;
-    int attDmg;
+    int attDamage;
 
     void Start()
     {
@@ -20,7 +20,6 @@ public class TowerAttack : MonoBehaviour
         if (target == null)
         {
             Object.Destroy(gameObject);
-            Debug.Log("¿©±â µé¾î¿È");
         }
         else
         {
@@ -36,7 +35,7 @@ public class TowerAttack : MonoBehaviour
 
     public void SetDamage(int damage)
     {
-        attDmg = damage;
+        attDamage = damage;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,7 +43,7 @@ public class TowerAttack : MonoBehaviour
         if (other.tag == "Balloon")
         {
             Object.Destroy(gameObject);
-            other.GetComponent<Balloon>().balloonHP -= attDmg;
+            other.GetComponent<Balloon>().balloonHP -= attDamage;
         }
     }
     

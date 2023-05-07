@@ -754,7 +754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -60, y: -300}
+  m_AnchoredPosition: {x: -60, y: -400}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &429820700
@@ -807,9 +807,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bac0ef3b9283784f857506d2d97bddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CloneTower: {fileID: 510585422}
+  m_CloneTower: {fileID: 510585424}
   DragingIcon: {fileID: 2101673982}
   setTower: {fileID: 669393476}
+  attRange: 2
+  attDelay: 0.5
+  attDamage: 2
 --- !u!1 &473287119
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -60, y: -425}
+  m_AnchoredPosition: {x: -60, y: -600}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473287121
@@ -899,9 +902,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bac0ef3b9283784f857506d2d97bddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CloneTower: {fileID: 510585422}
+  m_CloneTower: {fileID: 510585424}
   DragingIcon: {fileID: 2101673982}
   setTower: {fileID: 669393476}
+  attRange: 3
+  attDelay: 1
+  attDamage: 3
 --- !u!1 &510585419
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,8 +918,8 @@ GameObject:
   m_Component:
   - component: {fileID: 510585421}
   - component: {fileID: 510585420}
-  - component: {fileID: 510585422}
   - component: {fileID: 510585423}
+  - component: {fileID: 510585424}
   m_Layer: 0
   m_Name: CreateBlock
   m_TagString: Untagged
@@ -986,26 +992,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &510585422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510585419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6884e3839209a0a4dbbace5c8bb99315, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRange: 2
-  attDmg: 1
-  attDelay: 0.5
-  copyObj: {fileID: 64461279}
-  creatBalloon: {fileID: 997811105}
-  targetBallon: {fileID: 997811103}
 --- !u!58 &510585423
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1022,6 +1010,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &510585424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510585419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d61dcb2e818c54eb0f7a47823806df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attRange: 2
+  attDelay: 0.5
+  attDamage: 1
+  copyObj: {fileID: 64461279}
+  creatBalloon: {fileID: 997811105}
+  targetBallon: {fileID: 997811103}
 --- !u!1 &608313755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1058,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &608313757
 MonoBehaviour:
@@ -1411,7 +1417,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -180, y: -300}
+  m_AnchoredPosition: {x: -180, y: -400}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1228961054
@@ -1464,9 +1470,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bac0ef3b9283784f857506d2d97bddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CloneTower: {fileID: 510585422}
+  m_CloneTower: {fileID: 510585424}
   DragingIcon: {fileID: 2101673982}
   setTower: {fileID: 669393476}
+  attRange: 10
+  attDelay: 5
+  attDamage: 10
 --- !u!1 &1750095857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3753,7 +3762,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -180, y: -425}
+  m_AnchoredPosition: {x: -180, y: -600}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1929347369
@@ -3806,9 +3815,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bac0ef3b9283784f857506d2d97bddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CloneTower: {fileID: 510585422}
+  m_CloneTower: {fileID: 510585424}
   DragingIcon: {fileID: 2101673982}
   setTower: {fileID: 669393476}
+  attRange: 2
+  attDelay: 0.5
+  attDamage: 1
 --- !u!1001 &1941933885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3907,7 +3919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -180, y: -175}
+  m_AnchoredPosition: {x: -180, y: -200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1970398888
@@ -3960,9 +3972,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bac0ef3b9283784f857506d2d97bddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CloneTower: {fileID: 510585422}
+  m_CloneTower: {fileID: 510585424}
   DragingIcon: {fileID: 2101673982}
   setTower: {fileID: 669393476}
+  attRange: 2
+  attDelay: 1
+  attDamage: 1
 --- !u!1 &1994546263
 GameObject:
   m_ObjectHideFlags: 0
@@ -4207,7 +4222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -65, y: -175}
+  m_AnchoredPosition: {x: -65, y: -200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2072622668
@@ -4260,9 +4275,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bac0ef3b9283784f857506d2d97bddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CloneTower: {fileID: 510585422}
+  m_CloneTower: {fileID: 510585424}
   DragingIcon: {fileID: 2101673982}
   setTower: {fileID: 669393476}
+  attRange: 1
+  attDelay: 0.75
+  attDamage: 2
 --- !u!1001 &2094003810
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,9 +8,13 @@ using UnityEngine.UI;
 public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     Image image;
-    public Tower2 m_CloneTower = null;
+    public Tower m_CloneTower = null;
     public Image DragingIcon = null;
     public SetTowerBool setTower;
+
+    public float attRange = 2.0f;
+    public float attDelay = 0.5f;
+    public int attDamage = 1;
 
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -45,10 +49,14 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         if( setTower.ISAbleMap1Bool(wpos) )
         {
-            Tower2 towclone = GameObject.Instantiate(m_CloneTower);
+            Tower towclone = GameObject.Instantiate(m_CloneTower);
             towclone.SetSprite(GetComponent<Image>().sprite);
 
             towclone.transform.position = wpos;
+
+            towclone.attRange = this.attRange;
+            towclone.attDelay = this.attDelay;
+            towclone.attDamage = this.attDamage;
 
             setTower.setMap1Bool();
         }
@@ -61,25 +69,12 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     }
 
-    public void setField()
-    {
-        
-    }
-
 
     void Start()
     {
         image = GetComponent<Image>();
-        //setTower = GetComponent<SetTowerBool>();
-
         setTower = GameObject.FindObjectOfType<SetTowerBool>();
 
-        //setTower = new bool[10, 14];
-        //for (int i = 0; i < 10; i++)
-        //    for (int j = 0; j < 14; j++)
-        //        setTower[i, j] = GetComponent<SetTowerBool>().isAble[i, j];
-
-        //setTower = GetComponent<SetTowerBool>().isAble;
     }
 
     void Update()

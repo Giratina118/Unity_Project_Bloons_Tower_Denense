@@ -60,7 +60,6 @@ public class SetTowerBool : MonoBehaviour
     void Start()
     {
         setMap1Start();
-        //GetComponent<DragIcon>().setField();
     }
 
 
