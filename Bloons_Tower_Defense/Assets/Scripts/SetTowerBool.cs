@@ -53,7 +53,7 @@ public class SetTowerBool : MonoBehaviour
             isAble[i, 12] = false;
 
         isAble[1, 8] = isAble[2, 8] = isAble[2, 10] = isAble[2, 11] = isAble[3, 10] 
-            = isAble[4, 10] = isAble[6, 2] = isAble[7, 2] = isAble[8, 7] = isAble[8, 8] = false;
+            = isAble[4, 10] = isAble[6, 2] = isAble[7, 2] = isAble[8, 7] = false;
         
     }
 

@@ -18,6 +18,8 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public int attDamage = 1;
     public int price = 100;
 
+    public int towerAbility = 0;
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -59,6 +61,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             towclone.attRange = this.attRange;
             towclone.attDelay = this.attDelay;
             towclone.attDamage = this.attDamage;
+            towclone.towerAbility = this.towerAbility;
 
             gold.gold -= price;
             setTower.setMap1Bool();

@@ -13,6 +13,7 @@ public class Balloon : MonoBehaviour
 
     public CreatBalloon CreatBalloon;
     public GoldManager gold;
+    public HPManager hp;
 
     void Start()
     {
@@ -63,10 +64,16 @@ public class Balloon : MonoBehaviour
 
     void BalloonEnd()
     {
-        if (movePointNumber - 1 == CurrentmovePoint || balloonHP <= 0)
+        if (balloonHP <= 0)
         {
-            CreatBalloon.DestroyBalloons(this);
             gold.gold += getGold;
+            CreatBalloon.DestroyBalloons(this);
+        }
+        else if (movePointNumber - 1 == CurrentmovePoint)
+        {
+            hp.hp -= balloonHP;
+            gold.gold++;
+            CreatBalloon.DestroyBalloons(this);
         }
     }
 
