@@ -10,11 +10,13 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     Image image;
     public Tower m_CloneTower = null;
     public Image DragingIcon = null;
-    public SetTowerBool setTower;
+    SetTowerBool setTower;
+    GoldManager gold;
 
     public float attRange = 2.0f;
     public float attDelay = 0.5f;
     public int attDamage = 1;
+    public int price = 100;
 
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -47,7 +49,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
 
-        if( setTower.ISAbleMap1Bool(wpos) )
+        if( setTower.ISAbleMap1Bool(wpos) && gold.gold >= price)
         {
             Tower towclone = GameObject.Instantiate(m_CloneTower);
             towclone.SetSprite(GetComponent<Image>().sprite);
@@ -58,6 +60,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             towclone.attDelay = this.attDelay;
             towclone.attDamage = this.attDamage;
 
+            gold.gold -= price;
             setTower.setMap1Bool();
         }
 
@@ -74,7 +77,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         image = GetComponent<Image>();
         setTower = GameObject.FindObjectOfType<SetTowerBool>();
-
+        gold = GameObject.FindObjectOfType<GoldManager>();
     }
 
     void Update()

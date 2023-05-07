@@ -9,9 +9,10 @@ public class Balloon : MonoBehaviour
     public Transform[] movePoint;
     public int balloonHP = 1;
     public float balloonSpeed = 10.0f;
+    public int getGold = 5;
 
     public CreatBalloon CreatBalloon;
-
+    public GoldManager gold;
 
     void Start()
     {
@@ -65,6 +66,7 @@ public class Balloon : MonoBehaviour
         if (movePointNumber - 1 == CurrentmovePoint || balloonHP <= 0)
         {
             CreatBalloon.DestroyBalloons(this);
+            gold.gold += getGold;
         }
     }
 
