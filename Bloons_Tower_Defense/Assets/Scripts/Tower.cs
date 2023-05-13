@@ -14,6 +14,7 @@ public class Tower : MonoBehaviour
 
     float attackTimer = 0.0f;
 
+
     public void SetSprite(Sprite p_img)
     {
         m_LinkRender.sprite = p_img;
@@ -28,21 +29,44 @@ public class Tower : MonoBehaviour
     private void SelectTarget()
     {
 
-        float targetLength = attRange;
+        // 공격 범위 내에서 가장 앞에 있는 적 타겟팅 (ice Tower의 경우 얼어있지 않은 적 중 가장 앞의 대상)
+        float targetMoveDistance2 = 0.0f;
         for (int i = 0; i < creatBalloon.balloonsList.Count; i++)
         {
             float distance = Vector3.Distance(creatBalloon.balloonsList[i].transform.position, transform.position);
-
-            if (distance <= attRange)
+            if (distance <= attRange && creatBalloon.balloonsList[i].moveDistance > targetMoveDistance2 && (towerAbility != 3 || towerAbility == 3 && creatBalloon.balloonsList[i].isIceBool == false))
             {
-                targetLength = distance;
+                targetMoveDistance2 = creatBalloon.balloonsList[i].moveDistance;
                 targetBallon = creatBalloon.balloonsList[i].gameObject;
-                AttCreate();
                 attackTimer = 0.0f;
-                break;
             }
-
         }
+        if (targetMoveDistance2 > 0.00001f)
+        {
+            AttCreate();
+        }
+
+        // 가장 가까운 적 타겟팅
+        /*
+        {
+            float targetLength = attRange;
+            for (int i = 0; i < creatBalloon.balloonsList.Count; i++)
+            {
+                float distance = Vector3.Distance(creatBalloon.balloonsList[i].transform.position, transform.position);
+                if (distance <= attRange)
+                {
+                    targetLength = distance;
+                    targetBallon = creatBalloon.balloonsList[i].gameObject;
+                    AttCreate();
+                    attackTimer = 0.0f;
+                    break;
+                }
+
+            }
+        }
+        */
+
+
     }
 
 
@@ -66,6 +90,20 @@ public class Tower : MonoBehaviour
                     cloneObj1.GetComponent<TowerAttack>().SetAttackRange(attRange);
                 }
                 break;
+            case 4:
+                GameObject cloneObj2 = GameObject.Instantiate(copyObj);
+                cloneObj2.SetActive(true);
+                cloneObj2.transform.position = this.transform.position;
+                cloneObj2.GetComponent<TowerAttack>().SetDamage(attDamage);
+
+                Vector3 mousepos = Input.mousePosition;
+                Vector3 wpos = Camera.main.ScreenToWorldPoint(mousepos);
+                
+                wpos -= this.transform.position;
+
+                cloneObj2.GetComponent<TowerAttack>().SetDirection(wpos);
+                cloneObj2.GetComponent<TowerAttack>().SetAttackRange(attRange);
+                break;
             default:
                 GameObject cloneObj = GameObject.Instantiate(copyObj);
                 cloneObj.SetActive(true);
@@ -88,7 +126,12 @@ public class Tower : MonoBehaviour
     void Update()
     {
         attackTimer += Time.deltaTime;
-        if (attackTimer >= attDelay)
+
+        if (towerAbility == 5)
+        {
+            //라운드가 올라갈 때마다 특정 금액 획득
+        }
+        else if (attackTimer >= attDelay)
             SelectTarget();
 
     }

@@ -17,7 +17,6 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public float attDelay = 0.5f;
     public int attDamage = 1;
     public int price = 100;
-
     public int towerAbility = 0;
 
 
@@ -26,13 +25,13 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         image.color = new Color(1f, 1f, 1f, 0.5f);
         DragingIcon.sprite = GetComponent<Image>().sprite;
         DragingIcon.gameObject.SetActive(true);
-
+        
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         DragingIcon.transform.position = eventData.position;
-
+        DragingIcon.transform.localScale = this.transform.localScale;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -62,6 +61,8 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             towclone.attDelay = this.attDelay;
             towclone.attDamage = this.attDamage;
             towclone.towerAbility = this.towerAbility;
+
+            towclone.transform.localScale = this.transform.localScale;
 
             gold.gold -= price;
             setTower.setMap1Bool();

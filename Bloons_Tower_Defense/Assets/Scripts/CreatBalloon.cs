@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CreatBalloon : MonoBehaviour
 {
-    public GameObject copyObj;
+
+    public GameObject[] copyBalloonObj;
     GameObject cloneObj;
     public List<Balloon> balloonsList = null;
 
@@ -17,11 +18,21 @@ public class CreatBalloon : MonoBehaviour
 
     void Update()
     {
-        Creat();
+        
     }
 
-    void Creat()
+    public void Creat(GameObject copyObj)
     {
+        cloneObj = GameObject.Instantiate(copyObj);
+        cloneObj.SetActive(true);
+
+        Balloon cloneBalloon = cloneObj.GetComponent<Balloon>();
+        balloonsList.Add(cloneBalloon);
+
+
+
+
+        /*
         if (Input.GetKeyDown(KeyCode.Z))
         {
             cloneObj = GameObject.Instantiate(copyObj);
@@ -30,7 +41,10 @@ public class CreatBalloon : MonoBehaviour
             Balloon cloneBalloon = cloneObj.GetComponent<Balloon>();
             balloonsList.Add(cloneBalloon);
         }
+        */
+
     }
+    
 
     public void DestroyBalloons(Balloon balloon)
     {

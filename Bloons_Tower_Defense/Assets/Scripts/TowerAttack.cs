@@ -10,13 +10,11 @@ public class TowerAttack : MonoBehaviour
     protected Balloon balloon;
     protected int attDamage;
     protected int towerAbility;
-    protected int[] abil_1;
-
     protected float attRange;
-
-
-
     protected float m_Distance = 0f;
+
+    
+    
 
     void Start()
     {
@@ -35,7 +33,7 @@ public class TowerAttack : MonoBehaviour
         {
             transform.position += m_Direction * attSpeed * Time.deltaTime;
             m_Distance += attSpeed * Time.deltaTime;
-            if (m_Distance >= attRange )
+            if (m_Distance >= attRange)
             {
                 GameObject.Destroy(gameObject);
             }
@@ -43,7 +41,6 @@ public class TowerAttack : MonoBehaviour
         else
         {
             GameObject.Destroy(gameObject);
-            
         }
     }
 
@@ -78,13 +75,13 @@ public class TowerAttack : MonoBehaviour
 
     public float RangeSize = 1f;
 
-    protected void RangeAttackFN()
+    protected void RangeAttackFN(Collider2D other)
     {
         var hitcolliderarr = Physics2D.OverlapCircleAll(this.transform.position, RangeSize);
 
         foreach (var item in hitcolliderarr)
         {
-            if (item.tag == "Balloon")
+            if (item.tag == "Balloon" && item != other)
             {
                 item.GetComponent<Balloon>().balloonHP -= attDamage / 2;
             }
@@ -98,11 +95,28 @@ public class TowerAttack : MonoBehaviour
             Object.Destroy(gameObject);
             other.GetComponent<Balloon>().balloonHP -= attDamage;
 
-            if (towerAbility == 2)
+            
+            switch (towerAbility)
             {
-                if (other.tag != "Balloon")
-                    return;
-                RangeAttackFN();
+                case 2:
+                    if (other.tag != "Balloon")
+                        return;
+                    RangeAttackFN(other);
+                    break;
+                case 3:
+                    if (!other.GetComponent<Balloon>().isIceBool)
+                    {
+                        other.GetComponent<Balloon>().isIceBool = true;
+                        other.GetComponent<Balloon>().iceTimer = 0.0f;
+                        other.GetComponent<Balloon>().balloonSpeed /= 2;
+                    }
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                default:
+                    break;
             }
 
         }
