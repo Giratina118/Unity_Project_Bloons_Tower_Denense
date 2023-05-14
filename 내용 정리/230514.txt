@@ -1,0 +1,20 @@
+
+원하는 문자 추출, 숫자로 변환
+string tempstr = "Mine_[30, 10]";
+string tempstr2 = tempstr.Substring(6);
+int pos = tempstr2.IndexOf(']');		// 몇 번 자리에 있는지
+string tempstr3 = tempstr.Substring(0, pos);
+string[] splite = tempstr3.Split(",");
+
+XX = int.Parse(splite[0]);
+YY = int.Parse(splite[1]);
+
+XX = System.Convert.ToInt32(splite[0]);
+YY = System.Convert.ToInt32(splite[1]);
+
+
+정규 표현식 (Regex)
+전화번호 등 여러 조건을 편하게 보기 위해 따로 만든 표현식
+
+
+

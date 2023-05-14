@@ -39,7 +39,7 @@ Arrow 하나에 적혔던 것들이 prefab에서 작동됨
 Instantiate() -> 오브젝트를 복사할 때 사용
 GameObject go = Instantiate(ArrowPrefab);
 
-nt px = Random.Range(-6, 7);
+int px = Random.Range(-6, 7);
 go.transform.position = new Vector3(px, 7, 0);
 화살이 내려올 위치를 랜덤으로 지정, 계속 새로운 화살 만들어서 내려옴
 

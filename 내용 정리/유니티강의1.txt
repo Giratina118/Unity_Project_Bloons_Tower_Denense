@@ -1,0 +1,69 @@
+* 단축키
+- Alt + 왼쪽클릭 드래그 : 화면 회전
+- 오른쪽 클릭 드래그 : 화면회전
+- 마우스 휠버튼 클릭 : 화면이동
+- WASD + 오른쪽클릭 : 화면이동
+- 마우스 오른쪽 클릭 + 휠 돌리면 : 카메라 속도
+
+- 카메라 아이콘으로 카메라 속도 최저 최고치 조절
+
+Hierachy - 오브젝트 +버튼 으로 오브젝트 추가
+
+Project - 창고, 필요한건 Hierachy나 Scene에 꺼내서 쓴다.
+
+Console - Console.Write() 하면 나오던게 나오고 오류를 확인할수 있다.
+
+게임레이아웃은 메뉴탬을 드래그항 원하는대로 조절
+우측상단 default로 초기로 변경도 가능
+
+view tool -q
+Move tool- w
+Rotate tool-e
+Scale tool -r
+Rect tool -t
+
+Transform 의 tabup 버튼 눌러서 초기화 가능 - 큐브 초기화(원점으로)
+
+Center 와 pivot : 2개 이상의 오브젝트의 중심점을기준 - Center
+2개이상의 오브젝트를 한개 오브젝트기준으로 편집 - Pivot
+
+ * 좌표계
+- 월드좌표(Global) : 게임세계의 중심이 되는 좌표(동서남북 개념)
+- 로컬좌표(Local) : 오브젝트 중심의 좌표(오른쪽,왼쪽 개념)
+- 스크린좌표(Screen) : 화면좌표(마우스좌표), x,y축 값만 존재한다.
+
+Hierachy 에 우측클릭, 빈컨포넌트 추가
+모든 컨포넌트는 Transform 이라는 속성을 가짐
+Add Component 로 속성 추가 가능
+Mesh Filter - 물체에 대한 정보
+
+화면에 그려주는것 - 렌더링
+
+그려주기 위해 Mesh Renderer Component를 추가
+
+자주색 - 색상 정보 없음
+
+색상을 넣어주기 위해 Asset에서 우측클릭 create - Material
+재질을 저장 Asset/ Albedo에서 바꿈
+
+Mesh Filter는 물체자체를 바꿀수 있음
+
+Pixabay에서 무료이미지 다운, 게임에 사용할 여러자료를 드래그 해서 Asset에
+
+Albedo 좌측 네모칸에 이미지 드래그
+
+노멀맵 - 3D 모델을 점과 선으로 표현 / 
+점- 버텍스, 선- 엣지(버텍스가 많을수록 부하up)
+/ 그래픽 디자이너들이 만듦.
+- 이미지를 끌어서 Normal Map 좌측 흰칸에 넣으면 기존 이미지에 Normal이 들어가게됨
+
+UV - 이미지의 좌표  uv =xy / 이미지의 x좌표 - u / 이미지의 y좌표-v
+Tiling -들어간 이미지의 갯수가 늘어남 / 타일을 여러개 까는 것처럼 
+작은이미지의 갯수가 늘어나서 큰 곳을 덮을 수 있음
+Offset - 들어감 이미지위치를 바꿈
+
+C# Scipt 생성 - Asset 에서 우클릭 Create- C# create
+// 파일이름과 클래스의 이름이 동일해야함 ( 다르면 오류발생)
+// 처음생성할때 이름을 잘 바꿔줘야함 그래서
+
+// void Update(){} - 콜백함수, 부르지 않아도 호출됨

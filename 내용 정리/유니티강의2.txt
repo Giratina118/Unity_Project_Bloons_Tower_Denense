@@ -1,0 +1,192 @@
+2강
+폴더명 복수형으로 : Textures
+normal map 과 다운받은 이미지를 텍스쳐스로
+이미지로 만든 재질(Materials)를 Materials 폴더에
+
+자동완성을 위해 Visual Studio와 연결해줘야함
+(Edit - Preference(환경설정) - External Tools - External Script Ediotr에 
+Visual Studio가 있어야함
+
+Script를 하나의 컴포넌트로서 Cube(object)에 집어넣을수 있음
+
+create - C#script - 이름을 cStart로 처음부터 바꿔놓으면 
+class 명 자체가 바꾼 cStart로 생성됨
+
+Behaviour -f12 로 들어가 있는 함수 알수 있음
+(MonoBehaviour ->  Behaviour -> Component)
+
+*우리가 만든 Cstart는 MonoBehaviour를 자동으로 상속받는 클래스가 된다.
+*해당클래스를 상속하면 컴포넌트가 된다.
+*MonoBehaviour를 상속하지 않으면 일반 C#파일로 사용됨(지우는경우도 많다
+
+* 콜백함수
+-사용자가 호출하지 않아도 호출되는 함수
+
+* 생명주기(LifeCycle)
+- 콜백함수들이 호출되는 주기
+   //* Awake 
+        //- 게임시 1회 호출됨
+        //- 가장 먼저 실행됨(제일빠름)
+        //- 오브젝트가 활성화 상태여야 호출됨
+        Debug.Log("Awake"); //출력문 함수 Debug.Log("");
+
+오브젝트에 스크립트가 들어가야 작동이됨
+Cube 좌측 체크박스 좌측 체크를 풀어주면 비활성화- cStart 스크립트가 작동x
+(스크립트를 바꾸면 저장해야 반영됨)
+
+ //* OnEnable (Awake 처럼 LifeCycle 함수중 하나)
+        //- 오브젝트가 활성화 될때마다 호출
+        //- Awake함수 다음으로 호출
+        Debug.Log("OnEnable");
+
+--> Unity Console 창에 Awake 다음 OnEnable이 뜨는걸볼수 있다.
+체크박스를 풀고 체크할때마다 OnEnable이 뜨는모습 (동일문은 숫자로 묶음)
+Clear로 Console창 치울수 있음 우측상단에( 출력문 안보기, 경고문 안보기, )설정가능
+
+// Start is called before the first frame update
+    void Start()
+    {
+        //* Start (마찬가지로 콜백함수 중 하나)
+        //- 게임시작시 1회 호출
+        //- 오브젝트가 활성화 상태여야함
+        //- Awake->OnEnable->Start 순서로 호출됨
+        Debug.Log("Start");
+    }
+
+private void OnDisable()
+    {
+        // * OnDisable
+        //-오브젝트가 비활성화 될때마다 1회 호출
+        Debug.Log("OnDisable");
+    }
+
+시작하면 Console 창에 
+
+Awake - OnEnable - Start 순서로 호출되고 체크박스를 풀면
+Start 이후 첫번째 프레임 시작
+
+OnDisable - 체크하면 OnEnable이 호출됨
+
+/////////////////////////////////////////////////////////////////위함수들은 생성시 한번 호출되는함수
+반면 계속해서 무한하게 호출하는 함수 Update 함수가 존재함
+
+// * 프레임(Frame)
+//- 화면 렌더링은 1Frame 단위가 화면을 갱신하는 단위
+//- 화면을 한번 지우고 다시그리는, 갱신이 1Frame
+//- FPS(Frame Per Seconds) 의 형식으로 나타내며
+//- 30FPS는 1초에 30번 화면을 갱신한다는 의미
+
+void Update()
+    {
+        // * Update
+        //- 매 프레임마다 호출됨
+        //- 게임의 핵심 로직에 사용
+        //- 아무것도 없어도 호출되므로 사용하지 않으면 지워야 한다.
+        //- 프레임마다 호출되므로 일정하지 않은 주기로 호출됨(버벅거리면 덜 빈번하게 호출되는것)
+        Debug.Log("Update" + Time.deltaTime);
+        //Time.DeltaTime : 이전 호출과 현재 호출 사이 시간
+    }
+
+private void LateUpdate()
+    {
+        // * LateUpdate
+        //- Update함수가 호출된 후 바로 호출됨
+        //- 주로 카메라 이동에 사용 //update로 캐릭터 이동하고 lateupdate가 카메라를 이동하는 방식
+        Debug.Log("LateUpdate : " + Time.deltaTime);
+    }
+private void FixedUpdate()
+    {
+        // * FixedUpdate
+        //- 일정한 주기로 호출됨
+        //- 주기는 0.02초
+        //- 물리엔진의 계산 주기와 일치
+        //- 주로 물리적 계산에 사용됨 // 유니티에는 물리적 엔진이 들어가 있음
+        Debug.Log("FixedUpdate : " + Time.deltaTime);
+    }
+
+Edit - Project Settings - Time - Fixed Timestep 에 0.02초로 들어가 있는 것을 바꿀수있음.
+
+void Update()
+    {
+        if (Input.GetKey(KeyCode.Q)) 
+        {
+            //Input은 입력 관련 클래스 //GetKey 는 getter 매개변수인 KeyCode.Q 즉 Q를 누르면 "GetKey" 출력
+            //GetKey : 키를 누르면 지속적으로 true 반환
+            //계속반복되는 업데이트 함수 사이에 q키를 누루면 if문이 실행되게 됨.
+            Debug.Log("GetKey");
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            //GetKeyDown : 키를 누르면 1회 true 반환
+            Debug.Log("GetKeyDown");
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            //GetKeyUp : 키를 뗐을때 1회 true 반환
+            Debug.Log("GetKeyUp");
+        }
+    }
+/// Q또는q를 누르고 있으면 계속해서 출력이 되고 (GetKey)
+/// W또는 w를 누르면 누를때 1회 출력 (GetKeyDown)
+/// E또는 e를 누르다 뗐을때 1회 출력 (GetKeyUp)
+
+void Update()
+    {
+        // * GetButton
+        //- Edit -> ProjectSetting -> Input 에서 Axis를 보면
+Fire1, Fire2, Fire3 가 뭔지 알수 있다.
+Fire1 마우스0,Left ctral
+Fire2 마우스1,Left alt
+Fire3 마우스3,Left Shift
+
+마우스 왼쪽 0 오른쪽 1 스크롤키 2
+
+        if (Input.GetButton("Fire1")) //GetButton 누루면 계속해서
+        {
+            Debug.Log("GetButton");
+        }
+        if (Input.GetButtonDown("Fire2")) //GetButtonDown 눌렀을때 1회
+        {
+            Debug.Log("GetButtonDown");
+        }
+        if (Input.GetButtonUp("Fire3")) //GetButtonUp 뗐을때 1회
+        {
+            Debug.Log("GetButtonUp");
+        }
+    }
+컨포넌트에 넣고 실행하면 왼쪽클릭(0) 시 Fire1 출력 우클릭(1)시 fire2 한번출력 가운데 스크롤(2)
+클릭후 뗄때 1번 출력
+
+void Update()
+    {
+        // * GetAxis
+        //- 아무것도 안누르면 0을반환
+        //- Negaive 키를 누르면 0에서 점점 -1 을 반환
+        //- Positive키를 누르면 0에서 점점 1을 반환
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        float xPos = h * 5;
+        float yPos = v * 5;
+        transform.position = new Vector3(xPos, yPos, 0);
+    }
+
+마찬가지로 projectSetting input Axis에서 보면 Horizontal 은 좌우 Vertial은 상하
+누르면 0에서 1로 점점 커지면서 h,v에 넣어주는것
+(this.)(GameObject.)transform.Position
+this가 생략되어 있음(cGetAxis)를 가리킴
+(GameObject.)도 생략되어있음
+
+transform은 멤버변수로 유니티상의 컨포넌트의 위치좌표를 의미함
+그리고 transform의 .position으로 transform의 멤버 position에 접근
+position은 자료형이 Vector3( x,y,z 값을 가진 구조체임)
+
+if (Input.GetKey(KeyCode.D))
+        {
+// * 더해주는 것은 월드좌표 기준 이동
+            this.transform.position += Vector3.right*
+                Time.deltaTime*3; // x값에 1을 계속 더해주게 됨 deltaTime이 대략 0.0009 거기에 원하는 수만큼 곱해서 속력을
+ // *로컬좌표 기준 이동
+            transform.Translate(Vector3.right * Time.deltaTime * 3);
+            //내부적으로 로컬좌표 기준으로(즉 월드좌표가 아닌 오브젝트의 방향기준으로) 처리해주는 Translate
+        }
+순간이동이지만 매우작은수라 부드럽게 움직이는 것처럼 보인
