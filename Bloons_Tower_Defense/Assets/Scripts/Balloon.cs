@@ -20,9 +20,12 @@ public class Balloon : MonoBehaviour
     public bool isIceBool = false;
     public float iceTimer = 0.0f;
 
+    public float createdTime = 0.0f;
+
 
     void Start()
     {
+        createdTime = Time.time;
         BalloonStart();
     }
 

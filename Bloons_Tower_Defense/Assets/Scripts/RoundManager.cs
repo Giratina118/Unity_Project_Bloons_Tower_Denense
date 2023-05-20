@@ -11,18 +11,18 @@ public class RoundManager : MonoBehaviour
     public bool creating = false;
     public CreatBalloon creatBalloon;
 
-    public float createTime = 1.0f;
+    float createDelayTime = 0.5f;
     float curTime = 0.0f;
 
     public void ButtonClick()
     {
         if (creatBalloon.balloonsList.Count == 0 && !creating)
         {
-            roundBalloons();
+            StartCoroutine("roundBalloons");
         }
     }
 
-    public void roundBalloons()
+    public IEnumerator roundBalloons()
     {
         creating = true;
         for (int i = 0; i < balloons.Length; i++)
@@ -34,301 +34,286 @@ public class RoundManager : MonoBehaviour
 
         round++;
         int balloonCount = 0;
+
         switch (round)
         {
-
-
             case 1:
                 for (int i = 0; i < 12; i++)
                 {
-                    balloons[i] = 0;
+                    balloons[balloonCount] = 0;
                     balloonCount++;
-                }
-
-
-                for (int i = 0; i < balloonCount; i++)
-                {
-                    curTime = 0.0f;
-                    creatBalloon.Creat(creatBalloon.copyBalloonObj[balloons[i]]);
-                    
-                    while (curTime < createTime)
-                    {
-                        curTime += Time.deltaTime;
-                        Debug.Log($"{curTime}  {createTime}");
-
-                    }
                 }
                 break;
             case 2:
                 for (int i = 0; i < 25; i++)
                 {
-                    balloons[i] = 0;
+                    balloons[balloonCount] = 0;
                     balloonCount++;
                 }
                 break;
             case 3:
                 for (int i = 0; i < 24; i++)
                 {
-                    balloons[i] = 0;
+                    balloons[balloonCount] = 0;
                     balloonCount++;
                 }
                 for (int i = 0; i < 5; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 break;
             case 4:
                 for (int i = 0; i < 10; i++)
                 {
-                    balloons[i] = 0;
+                    balloons[balloonCount] = 0;
                     balloonCount++;
                 }
                 for (int i = 0; i < 24; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 break;
             case 5:
                 for (int i = 0; i < 30; i++)
                 {
-                    balloons[i] = 0;
+                    balloons[balloonCount] = 0;
                     balloonCount++;
                 }
                 for (int i = 0; i < 25; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 break;
             case 6:
                 for (int i = 0; i < 15; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 break;
             case 7:
                 for (int i = 0; i < 75; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 break;
             case 8:
                 for (int i = 0; i < 115; i++)
                 {
-                    balloons[i] = 0;
+                    balloons[balloonCount] = 0;
                     balloonCount++;
                 }
                 for (int i = 0; i < 68; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 break;
             case 9:
                 for (int i = 0; i < 49; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 22; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 break;
             case 10:
                 for (int i = 0; i < 40; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 break;
             case 11:
                 for (int i = 0; i < 24; i++)
                 {
-                    balloons[i] = 3;
+                    balloons[balloonCount] = 3;
                     balloonCount++;
                 }
                 break;
             case 12:
                 for (int i = 0; i < 30; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 25; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    balloons[i] = 3;
+                    balloons[balloonCount] = 3;
                     balloonCount++;
                 }
                 break;
             case 13:
                 for (int i = 0; i < 40; i++)
                 {
-                    balloons[i] = 0;
+                    balloons[balloonCount] = 0;
                     balloonCount++;
                 }
                 for (int i = 0; i < 75; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 30; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 break;
             case 14:
                 for (int i = 0; i < 26; i++)
                 {
-                    balloons[i] = 3;
+                    balloons[balloonCount] = 3;
                     balloonCount++;
                 }
                 break;
             case 15:
                 for (int i = 0; i < 30; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 60; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 break;
             case 16:
                 for (int i = 0; i < 80; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 80; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 break;
             case 17:
                 for (int i = 0; i < 150; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 30; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 break;
             case 18:
                 for (int i = 0; i < 30; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 26; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 for (int i = 0; i < 28; i++)
                 {
-                    balloons[i] = 3;
+                    balloons[balloonCount] = 3;
                     balloonCount++;
                 }
                 break;
             case 19:
                 for (int i = 0; i < 92; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 break;
             case 20:
                 for (int i = 0; i < 40; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 60; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 break;
             case 21:
                 for (int i = 0; i < 10; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 85; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 for (int i = 0; i < 30; i++)
                 {
-                    balloons[i] = 3;
+                    balloons[balloonCount] = 3;
                     balloonCount++;
                 }
                 break;
             case 22:
                 for (int i = 0; i < 45; i++)
                 {
-                    balloons[i] = 3;
+                    balloons[balloonCount] = 3;
                     balloonCount++;
                 }
                 break;
             case 23:
                 for (int i = 0; i < 35; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 for (int i = 0; i < 64; i++)
                 {
-                    balloons[i] = 3;
+                    balloons[balloonCount] = 3;
                     balloonCount++;
                 }
                 break;
             case 24:
                 for (int i = 0; i < 20; i++)
                 {
-                    balloons[i] = 1;
+                    balloons[balloonCount] = 1;
                     balloonCount++;
                 }
                 for (int i = 0; i < 60; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 for (int i = 0; i < 30; i++)
                 {
-                    balloons[i] = 3;
+                    balloons[balloonCount] = 3;
                     balloonCount++;
                 }
                 break;
             case 25:
                 for (int i = 0; i < 80; i++)
                 {
-                    balloons[i] = 2;
+                    balloons[balloonCount] = 2;
                     balloonCount++;
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    balloons[i] = 3;
+                    balloons[balloonCount] = 3;
                     balloonCount++;
                 }
                 break;
@@ -383,21 +368,28 @@ public class RoundManager : MonoBehaviour
             case 50:
                 break;
             default:
-                for (int i = 0; i < 20; i++)
-                {
-                    curTime = 0.0f;
-                    creatBalloon.Creat(creatBalloon.copyBalloonObj[0]);
-
-                    while (curTime < createTime)
-                    {
-                        curTime += Time.deltaTime;
-                        Debug.Log($"{curTime}  {createTime}");
-
-                    }
-                }
                 break;
         }
+
+        for (int i = 0; i < balloonCount; i++)
+        {
+            creatBalloon.Creat(creatBalloon.copyBalloonObj[balloons[i]]);
+
+            IEnumerator delay = TimeDelay(createDelayTime);
+            yield return StartCoroutine(delay);
+            StopCoroutine(delay);
+        }
+
+
         creating = false;
+    }
+
+
+    private IEnumerator TimeDelay(float dTime)
+    {
+        Debug.Log("ÄÚ·çÆ¾");
+
+        yield return new WaitForSeconds(dTime);
     }
 
     void Start()
@@ -411,8 +403,7 @@ public class RoundManager : MonoBehaviour
 
     void Update()
     {
-        round++;
-        
+
         this.GetComponent<TMP_Text>().text = round + " Round";
     }
 }
