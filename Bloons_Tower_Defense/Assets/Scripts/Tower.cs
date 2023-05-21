@@ -127,11 +127,7 @@ public class Tower : MonoBehaviour
     {
         attackTimer += Time.deltaTime;
 
-        if (towerAbility == 5)
-        {
-            //라운드가 올라갈 때마다 특정 금액 획득
-        }
-        else if (attackTimer >= attDelay)
+        if (towerAbility != 5 && attackTimer >= attDelay)
             SelectTarget();
 
     }

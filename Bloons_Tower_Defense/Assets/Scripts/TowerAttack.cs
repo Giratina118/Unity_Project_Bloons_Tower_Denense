@@ -73,7 +73,7 @@ public class TowerAttack : MonoBehaviour
 
 
 
-    public float RangeSize = 1f;
+    public float RangeSize = 1.0f;
 
     protected void RangeAttackFN(Collider2D other)
     {
@@ -83,7 +83,18 @@ public class TowerAttack : MonoBehaviour
         {
             if (item.tag == "Balloon" && item != other)
             {
-                item.GetComponent<Balloon>().balloonHP -= attDamage / 2;
+                if (towerAbility == 2)
+                {
+                    item.GetComponent<Balloon>().balloonHP -= attDamage / 2;
+                }
+                else if (towerAbility == 5)
+                {
+                    item.GetComponent<Balloon>().isIceBool = true;
+                    item.GetComponent<Balloon>().iceTimer = 0.0f;
+                    item.GetComponent<Balloon>().balloonSpeed /= 2;
+                }
+                
+
             }
         }
     }
@@ -93,9 +104,9 @@ public class TowerAttack : MonoBehaviour
         if (other.tag == "Balloon")
         {
             Object.Destroy(gameObject);
-            other.GetComponent<Balloon>().balloonHP -= attDamage;
+            other.GetComponent<Balloon>().SetDamage(attDamage);
 
-            
+
             switch (towerAbility)
             {
                 case 2:
@@ -109,6 +120,7 @@ public class TowerAttack : MonoBehaviour
                         other.GetComponent<Balloon>().isIceBool = true;
                         other.GetComponent<Balloon>().iceTimer = 0.0f;
                         other.GetComponent<Balloon>().balloonSpeed /= 2;
+                        RangeAttackFN(other);
                     }
                     break;
                 case 4:

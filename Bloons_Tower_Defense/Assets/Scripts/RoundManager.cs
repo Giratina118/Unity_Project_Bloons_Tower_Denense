@@ -10,9 +10,9 @@ public class RoundManager : MonoBehaviour
     
     public bool creating = false;
     public CreatBalloon creatBalloon;
+    public GoldManager goldManager;
 
     float createDelayTime = 0.5f;
-    float curTime = 0.0f;
 
     public void ButtonClick()
     {
@@ -318,20 +318,80 @@ public class RoundManager : MonoBehaviour
                 }
                 break;
             case 26:
+                for (int i = 0; i < 85; i++)
+                {
+                    balloons[balloonCount] = 3;
+                    balloonCount++;
+                }
                 break;
             case 27:
+                for (int i = 0; i < 20; i++)
+                {
+                    balloons[balloonCount] = 5;
+                    balloonCount++;
+                }
                 break;
             case 28:
+                for (int i = 0; i < 40; i++)
+                {
+                    balloons[balloonCount] = 2;
+                    balloonCount++;
+                }
+                for (int i = 0; i < 25; i++)
+                {
+                    balloons[balloonCount] = 4;
+                    balloonCount++;
+                }
                 break;
             case 29:
+                for (int i = 0; i < 125; i++)
+                {
+                    balloons[balloonCount] = 3;
+                    balloonCount++;
+                }
+                for (int i = 0; i < 20; i++)
+                {
+                    balloons[balloonCount] = 5;
+                    balloonCount++;
+                }
                 break;
             case 30:
+                for (int i = 0; i < 252; i++)
+                {
+                    balloons[balloonCount] = 2;
+                    balloonCount++;
+                }
                 break;
             case 31:
+                for (int i = 0; i < 20; i++)
+                {
+                    balloons[balloonCount] = 5;
+                    balloonCount++;
+                }
+                for (int i = 0; i < 20; i++)
+                {
+                    balloons[balloonCount] = 4;
+                    balloonCount++;
+                }
                 break;
             case 32:
+                for (int i = 0; i < 25; i++)
+                {
+                    balloons[balloonCount] = 3;
+                    balloonCount++;
+                }
+                for (int i = 0; i < 20; i++)
+                {
+                    balloons[balloonCount] = 4;
+                    balloonCount++;
+                }
                 break;
             case 33:
+                for (int i = 0; i < 150; i++)
+                {
+                    balloons[balloonCount] = 4;
+                    balloonCount++;
+                }
                 break;
             case 34:
                 break;
@@ -381,14 +441,13 @@ public class RoundManager : MonoBehaviour
         }
 
 
-        creating = false;
+        
+        
     }
 
 
     private IEnumerator TimeDelay(float dTime)
     {
-        Debug.Log("ÄÚ·çÆ¾");
-
         yield return new WaitForSeconds(dTime);
     }
 
@@ -403,7 +462,13 @@ public class RoundManager : MonoBehaviour
 
     void Update()
     {
-
         this.GetComponent<TMP_Text>().text = round + " Round";
+
+
+        if (creatBalloon.balloonsList.Count == 0 && creating)
+        {
+            creating = false;
+            goldManager.gold += (goldManager.bananaFarm * 50 + 50 + round * 10);
+        }
     }
 }

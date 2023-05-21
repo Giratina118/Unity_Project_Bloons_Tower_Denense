@@ -11,7 +11,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public Tower m_CloneTower = null;
     public Image DragingIcon = null;
     SetTowerBool setTower;
-    GoldManager gold;
+    GoldManager goldManager;
 
     public float attRange = 2.0f;
     public float attDelay = 0.5f;
@@ -50,7 +50,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
 
-        if( setTower.ISAbleMap1Bool(wpos) && gold.gold >= price)
+        if( setTower.ISAbleMap1Bool(wpos) && goldManager.gold >= price)
         {
             Tower towclone = GameObject.Instantiate(m_CloneTower);
             towclone.SetSprite(GetComponent<Image>().sprite);
@@ -64,8 +64,14 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
             towclone.transform.localScale = this.transform.localScale;
 
-            gold.gold -= price;
+            goldManager.gold -= price;
             setTower.setMap1Bool();
+
+            if(towclone.towerAbility == 5)
+            {
+                goldManager.bananaFarm++;
+            }
+
         }
 
 
@@ -81,7 +87,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         image = GetComponent<Image>();
         setTower = GameObject.FindObjectOfType<SetTowerBool>();
-        gold = GameObject.FindObjectOfType<GoldManager>();
+        goldManager = GameObject.FindObjectOfType<GoldManager>();
     }
 
     void Update()

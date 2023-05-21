@@ -100,4 +100,50 @@ public class Balloon : MonoBehaviour
         }
     }
 
+    public void SetDamage( int p_dmg )
+    {
+        balloonHP -= p_dmg;
+        // 데미지 효과
+
+        StartCoroutine(SetDamageCoroutine());
+    }
+
+    public float DamageSpeed = 0.1f;
+    IEnumerator SetDamageCoroutine()
+    {
+        SpriteRenderer render = GetComponent<SpriteRenderer>();
+        Color currcol = Color.white;
+        render.color = currcol;
+
+        // 색상 다운하기
+        while(true)
+        {
+            currcol.r -= DamageSpeed;
+            currcol.g -= DamageSpeed;
+            currcol.b -= DamageSpeed;
+
+            render.color = currcol;
+
+            yield return null;
+            if (currcol.r <= 0.5f)
+                break;
+        }
+
+
+        while (true)
+        {
+            currcol.r += DamageSpeed;
+            currcol.g += DamageSpeed;
+            currcol.b += DamageSpeed;
+
+            render.color = currcol;
+            yield return null;
+            if (currcol.r >= 1f)
+                break;
+        }
+
+
+        render.color = Color.white;
+    }
+
 }
