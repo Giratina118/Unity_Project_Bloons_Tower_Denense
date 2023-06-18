@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
     protected SpriteRenderer m_LinkRender = null;
     public float attRange = 2.0f, attDelay = 0.5f;
-    public int attDamage = 1, towerAbility = 0;
+    public int attDamage = 1, towerAbility = 0, level = 1;
 
     public GameObject copyObj;
     public CreatBalloon creatBalloon;
@@ -14,6 +15,18 @@ public class Tower : MonoBehaviour
 
     float attackTimer = 0.0f;
 
+    public GameObject towerInfo;
+    public Image towerInfoImage;
+
+
+    public DragIcon m_LinkInfo;
+    //public LocalTowerInfoData m_LinkInfoData;
+
+    public void InitSettings( DragIcon p_linkicon)
+    {
+        m_LinkInfo = p_linkicon;
+        SetSprite(p_linkicon.GetComponent<Image>().sprite);
+    }
 
     public void SetSprite(Sprite p_img)
     {
@@ -116,11 +129,37 @@ public class Tower : MonoBehaviour
 
     }
 
+    private void OnMouseDown()
+    {
+        Debug.Log("타워 클릭적용");
+
+
+        towerInfo.SetActive(true);
+
+        Image img = towerInfoImage.GetComponent<Image>();
+
+        img.sprite = m_LinkRender.sprite;
+
+        TowerInfoPanel panel = towerInfo.GetComponent<TowerInfoPanel>();
+        panel.InitSettings(this, 1);
+
+
+
+
+
+        if (transform.position.x > -1.0f)
+            towerInfo.transform.position = new Vector3(150.0f, towerInfo.transform.position.y, towerInfo.transform.position.z);
+        else
+            towerInfo.transform.position = new Vector3(1520.0f, towerInfo.transform.position.y, towerInfo.transform.position.z);
+
+
+    }
 
 
     void Start()
     {
         attackTimer = attDelay;
+        
     }
 
     void Update()

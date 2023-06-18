@@ -5,6 +5,31 @@ using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
+
+
+
+[System.Serializable]
+public class TowerInfoData
+{
+    public Image ModelImage;
+    public float attRange;
+    public float attDelay;
+    public int attDamage;
+    public int price;
+    public int towerAbility;
+
+}
+
+public class LocalTowerInfoData : TowerInfoData
+{
+    public int CurrLV = 1;
+    
+
+}
+
+
+
+
 public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     Image image;
@@ -18,7 +43,9 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public int attDamage = 1;
     public int price = 100;
     public int towerAbility = 0;
+    public int curLv = 1;
 
+    public TowerInfoData m_TowerInfo = new TowerInfoData();
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -53,7 +80,8 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if( setTower.ISAbleMap1Bool(wpos) && goldManager.gold >= price)
         {
             Tower towclone = GameObject.Instantiate(m_CloneTower);
-            towclone.SetSprite(GetComponent<Image>().sprite);
+            towclone.InitSettings(this);
+            //towclone.SetSprite(GetComponent<Image>().sprite);
 
             towclone.transform.position = wpos;
 
@@ -63,11 +91,13 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             towclone.towerAbility = this.towerAbility;
 
             towclone.transform.localScale = this.transform.localScale;
+            
 
             goldManager.gold -= price;
             setTower.setMap1Bool();
+            
 
-            if(towclone.towerAbility == 5)
+            if (towclone.towerAbility == 5)
             {
                 goldManager.bananaFarm++;
             }
