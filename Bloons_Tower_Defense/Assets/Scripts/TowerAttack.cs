@@ -14,8 +14,6 @@ public class TowerAttack : MonoBehaviour
     protected float m_Distance = 0f;
 
     
-    
-
     void Start()
     {
         m_Distance = 0;
@@ -44,7 +42,6 @@ public class TowerAttack : MonoBehaviour
         }
     }
 
-
     public Vector3 m_Direction = Vector3.zero;
     public void SetDirection(Vector3 p_direction)
     {
@@ -71,8 +68,6 @@ public class TowerAttack : MonoBehaviour
         attDamage = damage;
     }
 
-
-
     public float RangeSize = 1.0f;
 
     protected void RangeAttackFN(Collider2D other)
@@ -93,8 +88,6 @@ public class TowerAttack : MonoBehaviour
                     item.GetComponent<Balloon>().iceTimer = 0.0f;
                     item.GetComponent<Balloon>().balloonSpeed /= 2;
                 }
-                
-
             }
         }
     }
@@ -105,7 +98,6 @@ public class TowerAttack : MonoBehaviour
         {
             Object.Destroy(gameObject);
             other.GetComponent<Balloon>().SetDamage(attDamage);
-
 
             switch (towerAbility)
             {
@@ -130,8 +122,6 @@ public class TowerAttack : MonoBehaviour
                 default:
                     break;
             }
-
         }
     }
-    
 }

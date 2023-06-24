@@ -534,8 +534,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "  75       125\n\n\n\n\n 175      150\n\n\n\n\n 200      400\n\n\n\n \n150     
-    400 \n\n\n\n\n 500      700"
+  m_text: "  75       125\n\n\n\n\n 175      150\n\n\n\n\n 200      300\n\n\n\n \n
+    150      400 \n\n\n\n\n 250      600"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1822,8 +1822,9 @@ GameObject:
   - component: {fileID: 331426301}
   - component: {fileID: 331426303}
   - component: {fileID: 331426302}
+  - component: {fileID: 331426304}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LevelUpButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1946,6 +1947,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331426300}
   m_CullTransparentMesh: 1
+--- !u!114 &331426304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331426300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec76030efba48944922085beb154f01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &346474078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,19 +2012,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CloneTower: {fileID: 510585424}
   DragingIcon: {fileID: 2101673982}
-  attRange: 4
+  attRange: 3.5
   attDelay: 0.5
   attDamage: 3
-  price: 700
+  price: 600
   towerAbility: 0
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!114 &346474081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2381,18 +2387,11 @@ MonoBehaviour:
   m_CloneTower: {fileID: 510585424}
   DragingIcon: {fileID: 2101673982}
   attRange: 2
-  attDelay: 1
+  attDelay: 0.8
   attDamage: 2
   price: 150
   towerAbility: 0
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!1 &459167919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,19 +2647,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CloneTower: {fileID: 510585424}
   DragingIcon: {fileID: 2101673982}
-  attRange: 3
-  attDelay: 1.5
+  attRange: 3.5
+  attDelay: 2
   attDamage: 3
-  price: 400
+  price: 300
   towerAbility: 2
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!1 &486093939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,6 +2935,7 @@ MonoBehaviour:
   attDamage: 1
   towerAbility: 0
   level: 1
+  price: 100
   copyObj: {fileID: 64461279}
   creatBalloon: {fileID: 997811105}
   targetBallon: {fileID: 997811103}
@@ -3993,13 +3986,6 @@ MonoBehaviour:
   price: 150
   towerAbility: 3
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!114 &963304124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4989,13 +4975,6 @@ MonoBehaviour:
   price: 175
   towerAbility: 0
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!1 &1232481283
 GameObject:
   m_ObjectHideFlags: 0
@@ -5340,7 +5319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1264510470
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5424,6 +5403,8 @@ MonoBehaviour:
   nextDelay: {fileID: 1627200849}
   nextRange: {fileID: 96050207}
   nextLevel: {fileID: 1389252525}
+  levelUpButton: {fileID: 331426304}
+  goldManager: {fileID: 105423287}
 --- !u!1 &1269565302
 GameObject:
   m_ObjectHideFlags: 0
@@ -9342,13 +9323,6 @@ MonoBehaviour:
   price: 200
   towerAbility: 0
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!1 &1938194791
 GameObject:
   m_ObjectHideFlags: 0
@@ -9777,13 +9751,6 @@ MonoBehaviour:
   price: 75
   towerAbility: 0
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!1 &1994546263
 GameObject:
   m_ObjectHideFlags: 0
@@ -9924,16 +9891,9 @@ MonoBehaviour:
   attRange: 0
   attDelay: 1
   attDamage: 0
-  price: 500
+  price: 250
   towerAbility: 5
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!114 &1999174675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10193,13 +10153,6 @@ MonoBehaviour:
   price: 125
   towerAbility: 1
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!1001 &2094003810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10397,13 +10350,6 @@ MonoBehaviour:
   price: 400
   towerAbility: 4
   curLv: 1
-  m_TowerInfo:
-    ModelImage: {fileID: 0}
-    attRange: 2
-    attDelay: 0.5
-    attDamage: 1
-    price: 100
-    towerAbility: 0
 --- !u!114 &2103492732
 MonoBehaviour:
   m_ObjectHideFlags: 0

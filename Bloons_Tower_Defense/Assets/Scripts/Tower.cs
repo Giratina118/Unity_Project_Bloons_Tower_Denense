@@ -7,7 +7,7 @@ public class Tower : MonoBehaviour
 {
     protected SpriteRenderer m_LinkRender = null;
     public float attRange = 2.0f, attDelay = 0.5f;
-    public int attDamage = 1, towerAbility = 0, level = 1;
+    public int attDamage = 1, towerAbility = 0, level = 1, price = 100;
 
     public GameObject copyObj;
     public CreatBalloon creatBalloon;
@@ -18,20 +18,11 @@ public class Tower : MonoBehaviour
     public GameObject towerInfo;
     public Image towerInfoImage;
 
-
     public DragIcon m_LinkInfo;
-    //public LocalTowerInfoData m_LinkInfoData;
 
-    public void InitSettings( DragIcon p_linkicon)
+    public void SetSprite(Sprite p_linkicon)
     {
-        m_LinkInfo = p_linkicon;
-        SetSprite(p_linkicon.GetComponent<Image>().sprite);
-    }
-
-    public void SetSprite(Sprite p_img)
-    {
-        m_LinkRender.sprite = p_img;
-
+        m_LinkRender.sprite = p_linkicon;
     }
 
     private void Awake()
@@ -41,7 +32,6 @@ public class Tower : MonoBehaviour
 
     private void SelectTarget()
     {
-
         // 공격 범위 내에서 가장 앞에 있는 적 타겟팅 (ice Tower의 경우 얼어있지 않은 적 중 가장 앞의 대상)
         float targetMoveDistance2 = 0.0f;
         for (int i = 0; i < creatBalloon.balloonsList.Count; i++)
@@ -79,13 +69,10 @@ public class Tower : MonoBehaviour
         }
         */
 
-
     }
-
 
     void AttCreate()
     {
-        
         switch (towerAbility)
         {
             case 1:
@@ -126,40 +113,28 @@ public class Tower : MonoBehaviour
                 cloneObj.GetComponent<TowerAttack>().SetTowerAbility(towerAbility);
                 break;
         }
-
     }
 
     private void OnMouseDown()
     {
         Debug.Log("타워 클릭적용");
-
-
         towerInfo.SetActive(true);
 
         Image img = towerInfoImage.GetComponent<Image>();
-
         img.sprite = m_LinkRender.sprite;
 
         TowerInfoPanel panel = towerInfo.GetComponent<TowerInfoPanel>();
         panel.InitSettings(this, 1);
 
-
-
-
-
         if (transform.position.x > -1.0f)
             towerInfo.transform.position = new Vector3(150.0f, towerInfo.transform.position.y, towerInfo.transform.position.z);
         else
             towerInfo.transform.position = new Vector3(1520.0f, towerInfo.transform.position.y, towerInfo.transform.position.z);
-
-
     }
-
 
     void Start()
     {
         attackTimer = attDelay;
-        
     }
 
     void Update()
@@ -168,9 +143,5 @@ public class Tower : MonoBehaviour
 
         if (towerAbility != 5 && attackTimer >= attDelay)
             SelectTarget();
-
     }
-
-
-
 }

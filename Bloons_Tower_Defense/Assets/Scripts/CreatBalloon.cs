@@ -15,7 +15,6 @@ public class CreatBalloon : MonoBehaviour
         balloonsList = new List<Balloon>();
     }
 
-
     void Update()
     {
         
@@ -30,8 +29,6 @@ public class CreatBalloon : MonoBehaviour
         balloonsList.Add(cloneBalloon);
 
 
-
-
         /*
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -42,10 +39,8 @@ public class CreatBalloon : MonoBehaviour
             balloonsList.Add(cloneBalloon);
         }
         */
-
     }
     
-
     public void DestroyBalloons(Balloon balloon)
     {
         balloonsList.Remove(balloon);
