@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
 public class NextLevel : MonoBehaviour
 {
-
 
     public void WriteMaxLevel()
     {
@@ -17,6 +15,7 @@ public class NextLevel : MonoBehaviour
     {
         
     }
+
     void Update()
     {
         

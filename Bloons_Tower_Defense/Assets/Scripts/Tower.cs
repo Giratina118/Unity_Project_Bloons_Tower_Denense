@@ -49,6 +49,7 @@ public class Tower : MonoBehaviour
             AttCreate();
         }
 
+        #region
         // 가장 가까운 적 타겟팅
         /*
         {
@@ -68,7 +69,7 @@ public class Tower : MonoBehaviour
             }
         }
         */
-
+        #endregion
     }
 
     void AttCreate()

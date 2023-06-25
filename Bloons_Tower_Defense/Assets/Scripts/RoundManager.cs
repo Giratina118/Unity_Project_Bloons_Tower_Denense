@@ -2,9 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
+[System.Serializable]
+public class PathInfoData
+{
+    //balloonPath = 4;
+    //for (int i = 0; i< 12; i++)
+    //{
+    //    balloons[balloonCount] = 0;
+    //    balloonCount++;
+    //}
+
+    public int BallonPath = 0;
+    public List<PathInfoChild> PathChildInfoList = new List<PathInfoChild>();
+    [System.Serializable]
+    public class PathInfoChild
+    {
+        public int BooleanCount = 0;
+        public int BooleanType = 0;
+    }
+}
 
 public class RoundManager : MonoBehaviour
 {
+    public List<PathInfoData> m_PathInfos = new List<PathInfoData>();
+
     public int round = 0;
     int[] balloons = new int[300];
     
@@ -13,6 +37,8 @@ public class RoundManager : MonoBehaviour
     public GoldManager goldManager;
 
     float createDelayTime = 0.5f;
+
+    public int balloonPath = 0;
 
     public void ButtonClick()
     {
@@ -35,9 +61,27 @@ public class RoundManager : MonoBehaviour
         round++;
         int balloonCount = 0;
 
+
+        PathInfoData infodata = m_PathInfos[round - 1];
+        {
+            balloonPath = infodata.BallonPath;
+
+            foreach (var item in infodata.PathChildInfoList)
+            {
+                for (int i = 0; i < item.BooleanCount; i++)
+                {
+                    balloons[balloonCount] = item.BooleanType;
+                    balloonCount++;
+                }
+            }
+        }
+
+        #region
+        /*
         switch (round)
         {
             case 1:
+                balloonPath = 4;
                 for (int i = 0; i < 12; i++)
                 {
                     balloons[balloonCount] = 0;
@@ -45,6 +89,7 @@ public class RoundManager : MonoBehaviour
                 }
                 break;
             case 2:
+                balloonPath = 3;
                 for (int i = 0; i < 25; i++)
                 {
                     balloons[balloonCount] = 0;
@@ -52,11 +97,14 @@ public class RoundManager : MonoBehaviour
                 }
                 break;
             case 3:
+                balloonPath = 2;
                 for (int i = 0; i < 24; i++)
                 {
                     balloons[balloonCount] = 0;
                     balloonCount++;
                 }
+
+                balloonPath = 3;
                 for (int i = 0; i < 5; i++)
                 {
                     balloons[balloonCount] = 1;
@@ -64,6 +112,7 @@ public class RoundManager : MonoBehaviour
                 }
                 break;
             case 4:
+                balloonPath = 1;
                 for (int i = 0; i < 10; i++)
                 {
                     balloons[balloonCount] = 0;
@@ -76,6 +125,7 @@ public class RoundManager : MonoBehaviour
                 }
                 break;
             case 5:
+                balloonPath = 0;
                 for (int i = 0; i < 30; i++)
                 {
                     balloons[balloonCount] = 0;
@@ -394,6 +444,7 @@ public class RoundManager : MonoBehaviour
                 }
                 break;
             case 34:
+                StageClear();
                 break;
             case 35:
                 break;
@@ -430,6 +481,9 @@ public class RoundManager : MonoBehaviour
             default:
                 break;
         }
+        */
+        #endregion
+
 
         for (int i = 0; i < balloonCount; i++)
         {
@@ -439,12 +493,12 @@ public class RoundManager : MonoBehaviour
             yield return StartCoroutine(delay);
             StopCoroutine(delay);
         }
-
-
-        
-        
     }
 
+    private void StageClear()
+    {
+        SceneManager.LoadScene("Map2");
+    }
 
     private IEnumerator TimeDelay(float dTime)
     {
@@ -459,11 +513,9 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         this.GetComponent<TMP_Text>().text = round + " Round";
-
 
         if (creatBalloon.balloonsList.Count == 0 && creating)
         {

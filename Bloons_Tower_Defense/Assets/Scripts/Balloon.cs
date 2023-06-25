@@ -6,7 +6,6 @@ public class Balloon : MonoBehaviour
 {
     public int movePointNumber = 13;
     int CurrentmovePoint = 0;
-    public Transform[] movePoint;
     public int balloonHP = 1;
     public float balloonSpeed = 1.0f;
     public int getGold = 5;
@@ -23,9 +22,21 @@ public class Balloon : MonoBehaviour
     public float createdTime = 0.0f;
 
 
+    public List<AllMovePath> m_allmovePathList = new List<AllMovePath>();
+    public RoundManager round = null;
+    public List<NextPath> movePoint = new List<NextPath>();
+
+
+    void PathSelect()
+    {
+        movePoint = m_allmovePathList[round.balloonPath].m_AllPathList;
+    }
+
+
     void Start()
     {
         createdTime = Time.time;
+        PathSelect();
         BalloonStart();
     }
 
@@ -41,14 +52,15 @@ public class Balloon : MonoBehaviour
 
     void BalloonStart()
     {
-        transform.position = movePoint[0].position;
+        movePointNumber = movePoint.Count;
+        transform.position = movePoint[0].transform.position;
     }
 
     void BalloonMove()
     {
         BalloonEnd();
 
-        Vector2 nextPos = movePoint[CurrentmovePoint + 1].position;
+        Vector2 nextPos = movePoint[CurrentmovePoint + 1].transform.position;
 
         if (Mathf.Abs(transform.position.x - nextPos.x) > Mathf.Abs(transform.position.y - nextPos.y))
         {
@@ -68,7 +80,7 @@ public class Balloon : MonoBehaviour
         if (Vector2.Distance(transform.position, nextPos) < 0.1f)
         {
             CurrentmovePoint++;
-            transform.position = movePoint[CurrentmovePoint].position;
+            transform.position = movePoint[CurrentmovePoint].transform.position;
 
             BalloonEnd();
         }

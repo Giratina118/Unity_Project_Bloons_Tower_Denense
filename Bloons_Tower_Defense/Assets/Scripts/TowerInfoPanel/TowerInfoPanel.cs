@@ -45,41 +45,47 @@ public class TowerInfoPanel : MonoBehaviour
 
     public void _On_LevelUP()
     {
-        if (m_LinkTowerData.level <= 2)
+        if (goldManager.gold >= m_LinkTowerData.price)
         {
-            if (m_LinkTowerData.level == 1)
+            if (m_LinkTowerData.level <= 2)
             {
-                m_LinkTowerData.attDamage += 1;
-                if (m_LinkTowerData.towerAbility == 5)
-                    goldManager.bananaFarm += 50;
+                if (m_LinkTowerData.level == 1)
+                {
+                    m_LinkTowerData.attDamage += 1;
+                    if (m_LinkTowerData.towerAbility == 5)
+                        goldManager.bananaFarm += 50;
+                }
+                else
+                {
+                    m_LinkTowerData.attDamage += 2;
+                    if (m_LinkTowerData.towerAbility == 5)
+                        goldManager.bananaFarm += 150;
+                }
+
+                goldManager.gold -= m_LinkTowerData.price;
+
+                m_LinkTowerData.attDelay *= 0.8f;
+                m_LinkTowerData.attRange += 0.5f;
+                m_LinkTowerData.level++;
+                m_LinkTowerData.price *= 2;
+
+
+                UpdateUI();
             }
             else
             {
-                m_LinkTowerData.attDamage += 2;
-                if (m_LinkTowerData.towerAbility == 5)
-                    goldManager.bananaFarm += 150;
+                nextLevel.WriteMaxLevel();
             }
-
-            goldManager.gold -= m_LinkTowerData.price;
-
-            m_LinkTowerData.attDelay *= 0.8f;
-            m_LinkTowerData.attRange += 0.5f;
-            m_LinkTowerData.level++;
-            m_LinkTowerData.price *= 2;
-
-            
-            UpdateUI();
         }
         else
-        {
-            nextLevel.WriteMaxLevel();
-        }
+            Debug.Log("µ· ºÎÁ·");
     }
 
     void Start()
     {
         
     }
+
     void Update()
     {
         

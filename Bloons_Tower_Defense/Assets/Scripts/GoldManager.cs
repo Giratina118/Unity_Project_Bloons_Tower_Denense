@@ -8,12 +8,10 @@ public class GoldManager : MonoBehaviour
     public int gold = 200;
     public int bananaFarm = 0;
 
-
     void Start()
     {
 
     }
-
 
     void Update()
     {

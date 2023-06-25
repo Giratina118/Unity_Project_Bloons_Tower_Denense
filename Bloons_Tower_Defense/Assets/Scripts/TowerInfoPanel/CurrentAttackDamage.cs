@@ -15,6 +15,7 @@ public class CurrentAttackDamage : MonoBehaviour
     {
         
     }
+
     void Update()
     {
         

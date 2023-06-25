@@ -7,10 +7,8 @@ public class SetTowerBool : MonoBehaviour
     public bool[,] isAble;
     int x, y;
 
-
     public bool ISAbleMap1Bool(Vector2 p_wpos)
     {
-
         x = (int)Mathf.Floor(p_wpos.x) + 8;
         y = 4 - (int)Mathf.Floor(p_wpos.y);
         if (y < 0 || y > 9 || x < 0 || x > 13)
@@ -18,6 +16,7 @@ public class SetTowerBool : MonoBehaviour
         else
             return isAble[y, x];
     }
+
     public void setMap1Bool()
     {
         isAble[y, x] = false;
@@ -61,7 +60,6 @@ public class SetTowerBool : MonoBehaviour
     {
         setMap1Start();
     }
-
 
     void Update()
     {

@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.SceneManagement;
 
-public class CurrentAttackRange : MonoBehaviour
+public class TitleGameStartButton : MonoBehaviour
 {
-
-    public void WriteRange(float range)
+    public void ButtonClick()
     {
-        this.GetComponent<TMP_Text>().text = "Range :  " + range;
+        SceneManager.LoadScene("MapSelectScene");
     }
 
     void Start()

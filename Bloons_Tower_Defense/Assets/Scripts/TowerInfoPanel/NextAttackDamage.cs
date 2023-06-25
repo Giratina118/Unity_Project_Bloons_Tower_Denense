@@ -22,6 +22,7 @@ public class NextAttackDamage : MonoBehaviour
     {
         
     }
+
     void Update()
     {
         
