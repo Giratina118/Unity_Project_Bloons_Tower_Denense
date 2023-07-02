@@ -8,12 +8,6 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class PathInfoData
 {
-    //balloonPath = 4;
-    //for (int i = 0; i< 12; i++)
-    //{
-    //    balloons[balloonCount] = 0;
-    //    balloonCount++;
-    //}
 
     public int BallonPath = 0;
     public List<PathInfoChild> PathChildInfoList = new List<PathInfoChild>();
@@ -35,10 +29,13 @@ public class RoundManager : MonoBehaviour
     public bool creating = false;
     public CreatBalloon creatBalloon;
     public GoldManager goldManager;
+    public GameObject mapClearUI;
 
     float createDelayTime = 0.5f;
-
     public int balloonPath = 0;
+    public int mapSceneNumber = 0;
+
+    public ParticleSystem[] firecracker = new ParticleSystem[4];
 
     public void ButtonClick()
     {
@@ -60,6 +57,11 @@ public class RoundManager : MonoBehaviour
 
         round++;
         int balloonCount = 0;
+
+        if (round == 3)
+        {
+            StageClear();
+        }
 
 
         PathInfoData infodata = m_PathInfos[round - 1];
@@ -493,11 +495,29 @@ public class RoundManager : MonoBehaviour
             yield return StartCoroutine(delay);
             StopCoroutine(delay);
         }
+
     }
 
     private void StageClear()
     {
-        SceneManager.LoadScene("Map2");
+        mapClearUI.SetActive(true);
+        DataManager.Instance.data.isClear[mapSceneNumber] = true;
+        DataManager.Instance.SaveGameData();
+
+
+        StartCoroutine(FirecrackerCoroutine());
+    }
+
+    private IEnumerator FirecrackerCoroutine()
+    {
+        firecracker[0].gameObject.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        firecracker[2].gameObject.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        firecracker[1].gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        firecracker[3].gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
     }
 
     private IEnumerator TimeDelay(float dTime)

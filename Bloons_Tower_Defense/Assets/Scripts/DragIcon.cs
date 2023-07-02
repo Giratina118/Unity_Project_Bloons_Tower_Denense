@@ -61,7 +61,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         wpos.z = -0.1f;
 
 
-        if( setTower.ISAbleMap1Bool(wpos) && goldManager.gold >= price)
+        if( setTower.ISAbleMapBool(wpos) && goldManager.gold >= price)
         {
             Tower towclone = GameObject.Instantiate(m_CloneTower);
             //towclone.SetSprite(this);
@@ -77,7 +77,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             towclone.transform.localScale = this.transform.localScale;
 
             goldManager.gold -= price;
-            setTower.setMap1Bool();
+            setTower.SetMapBool();
             towclone.price = this.price * 2;
 
             if (towclone.towerAbility == 5)
