@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd1623b4bc8b3694c99c538074c0db38, type: 3}
+  m_Name: BoomerangTableData
+  m_EditorClassIdentifier: 
+  attRange: 2
+  attDelay: 0.8
+  attDamage: 2
+  price: 150
+  towerAbility: 0
+  curLv: 1
+  IconSprite: {fileID: 21300000, guid: 64f3071b43336f542916bbdb850157cb, type: 3}
+  Description: "\uBD80\uBA54\uB791 \uC6D0\uC22D\uC774 \uD0C0\uC6CC \uC815\uBCF4"

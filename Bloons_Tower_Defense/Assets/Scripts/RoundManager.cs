@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class PathInfoData
 {
-
     public int BallonPath = 0;
     public List<PathInfoChild> PathChildInfoList = new List<PathInfoChild>();
     [System.Serializable]
@@ -27,6 +26,7 @@ public class RoundManager : MonoBehaviour
     int[] balloons = new int[300];
     
     public bool creating = false;
+    bool nextRound = false;
     public CreatBalloon creatBalloon;
     public GoldManager goldManager;
     public GameObject mapClearUI;
@@ -58,11 +58,7 @@ public class RoundManager : MonoBehaviour
         round++;
         int balloonCount = 0;
 
-        if (round == 3)
-        {
-            StageClear();
-        }
-
+        
 
         PathInfoData infodata = m_PathInfos[round - 1];
         {
@@ -495,7 +491,7 @@ public class RoundManager : MonoBehaviour
             yield return StartCoroutine(delay);
             StopCoroutine(delay);
         }
-
+        nextRound = true;
     }
 
     private void StageClear()
@@ -510,14 +506,17 @@ public class RoundManager : MonoBehaviour
 
     private IEnumerator FirecrackerCoroutine()
     {
-        firecracker[0].gameObject.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
-        firecracker[2].gameObject.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
-        firecracker[1].gameObject.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
-        firecracker[3].gameObject.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
+        if (!firecracker[0].gameObject.active)
+        {
+            firecracker[0].gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            firecracker[2].gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            firecracker[1].gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            firecracker[3].gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
     private IEnumerator TimeDelay(float dTime)
@@ -537,10 +536,17 @@ public class RoundManager : MonoBehaviour
     {
         this.GetComponent<TMP_Text>().text = round + " Round";
 
-        if (creatBalloon.balloonsList.Count == 0 && creating)
+        if (creatBalloon.balloonsList.Count == 0 && creating && nextRound)
         {
             creating = false;
+            nextRound = false;
             goldManager.gold += (goldManager.bananaFarm * 50 + 50 + round * 10);
+
+            // 맵 클리어 단계
+            if (round == 2)
+            {
+                StageClear();
+            }
         }
     }
 }

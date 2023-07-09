@@ -50,10 +50,6 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(filePath, ToJsonData);
 
         print("저장 완료");
-        for (int i = 0; i < data.isClear.Length; i++)
-        {
-            print($"{i}번 챕터 잠금 해제 여부 : " + data.isClear[i]);
-        }
     }
 
     void Start()

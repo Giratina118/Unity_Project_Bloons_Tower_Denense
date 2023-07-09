@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
@@ -21,8 +22,11 @@ public class TowerInfoData
 public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     Image image;
+    public TowerTableData TowerData = null;
     public Tower m_CloneTower = null;
     public Image DragingIcon = null;
+    public TMP_Text m_PriceText = null;
+
     SetTowerBool setTower;
     GoldManager goldManager;
 
@@ -33,7 +37,7 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public int towerAbility = 0;
     public int curLv = 1;
 
-    //public TowerInfoData m_TowerInfo = new TowerInfoData();
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -87,8 +91,24 @@ public class DragIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
+    [ContextMenu("[테스트 확인용]")]
+    public void SetChangeDatas()
+    {
+        DragingIcon.sprite = TowerData.IconSprite;
+        m_PriceText.text = $"{TowerData.price}";
+
+        attRange = TowerData.attDamage;
+        attDelay = TowerData.attDelay;
+        attDamage = TowerData.attDamage;
+        price = TowerData.price;
+        towerAbility = TowerData.towerAbility;
+        curLv = TowerData.curLv;
+
+    }
+
     void Start()
     {
+        SetChangeDatas();
         image = GetComponent<Image>();
         setTower = GameObject.FindObjectOfType<SetTowerBool>();
         goldManager = GameObject.FindObjectOfType<GoldManager>();
